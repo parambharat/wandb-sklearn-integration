@@ -12,7 +12,7 @@ train_X, test_X, train_y, test_y = train_test_split(
     iris.data, iris.target, test_size=0.2, random_state=42
 )
 
-with wandb.init(project="autolog",) as run:
+with wandb.init(project="autolog",name="example_gridsearch") as run:
     parameters = {"kernel": ("linear", "rbf"), "C": [1, 10]}
     svc = svm.SVC()
     clf = GridSearchCV(svc, parameters)
