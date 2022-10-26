@@ -48,9 +48,9 @@ class _AutologgingSessionManager:
 
 def autologging_is_disabled(integration_name):
     """
-    Returns a boolean flag of whether the autologging integration is disabled.
+    Returns a boolean flag of whether the autologging wandb_sklearn_integration is disabled.
 
-    param integration_name: An autologging integration flavor name.
+    param integration_name: An autologging wandb_sklearn_integration flavor name.
     """
     explicit_disabled = get_autologging_config(integration_name, "disable", False)
     if explicit_disabled:
@@ -80,11 +80,11 @@ def disable_autologging():
 
 def get_autologging_config(flavor_name, config_key, default_value=None):
     """
-    Returns a desired config value for a specified autologging integration.
+    Returns a desired config value for a specified autologging wandb_sklearn_integration.
     Returns `None` if specified `flavor_name` has no recorded configs.
     If `config_key` is not set on the config object, default value is returned.
 
-    param flavor_name: An autologging integration flavor name.
+    param flavor_name: An autologging wandb_sklearn_integration flavor name.
     param config_key: The key for the desired config value.
     param default_value: The default_value to return
     """
@@ -198,10 +198,10 @@ class AutologgingEventLogger:
     @staticmethod
     def log_autolog_called(integration, call_args, call_kwargs):
         """
-        Called when the `autolog()` method for an autologging integration
-        is invoked (e.g., when a user invokes `wandb.integration.sklearn.autolog()`)
+        Called when the `autolog()` method for an autologging wandb_sklearn_integration
+        is invoked (e.g., when a user invokes `wandb.wandb_sklearn_integration.sklearn.autolog()`)
 
-        param integration: The autologging integration for which `autolog()` was called.
+        param wandb_sklearn_integration: The autologging wandb_sklearn_integration for which `autolog()` was called.
         param call_args: **DEPRECATED** The positional arguments passed to the `autolog()` call.
                           This field is empty ; all arguments are passed in
                           keyword form via `call_kwargs`.
@@ -229,7 +229,7 @@ class AutologgingEventLogger:
         session, patch_obj, function_name, call_args, call_kwargs
     ):
         """
-        Called upon invocation of a patched API associated with an autologging integration
+        Called upon invocation of a patched API associated with an autologging wandb_sklearn_integration
         (e.g., `sklearn.linear_model.LogisticRegression.fit()`).
 
         param session: The `AutologgingSession` associated with the patched API call.
@@ -253,7 +253,7 @@ class AutologgingEventLogger:
     ):
         """
         Called upon successful termination of a patched API associated with an autologging
-        integration (e.g., `sklearn.linear_model.LogisticRegression.fit()`).
+        wandb_sklearn_integration (e.g., `sklearn.linear_model.LogisticRegression.fit()`).
 
         param session: The `AutologgingSession` associated with the patched API call.
         param patch_obj: The object (class, module, etc.) on which the patched API was called.
@@ -276,7 +276,7 @@ class AutologgingEventLogger:
         session, patch_obj, function_name, call_args, call_kwargs, exception
     ):
         """
-        Called when execution of a patched API associated with an autologging integration
+        Called when execution of a patched API associated with an autologging wandb_sklearn_integration
         (e.g., `sklearn.linear_model.LogisticRegression.fit()`) terminates with an exception.
 
         param session: The `AutologgingSession` associated with the patched API call.
@@ -302,7 +302,7 @@ class AutologgingEventLogger:
         session, patch_obj, function_name, call_args, call_kwargs
     ):
         """
-        Called during the execution of a patched API associated with an autologging integration
+        Called during the execution of a patched API associated with an autologging wandb_sklearn_integration
         when the original / underlying API is invoked. For example, this is called when
         a patched implementation of `sklearn.linear_model.LogisticRegression.fit()` invokes
         the original implementation of `sklearn.linear_model.LogisticRegression.fit()`.
@@ -328,7 +328,7 @@ class AutologgingEventLogger:
         session, patch_obj, function_name, call_args, call_kwargs
     ):
         """
-        Called during the execution of a patched API associated with an autologging integration
+        Called during the execution of a patched API associated with an autologging wandb_sklearn_integration
         when the original / underlying API invocation terminates successfully. For example,
         when a patched implementation of `sklearn.linear_model.LogisticRegression.fit()` invokes the
         original / underlying implementation of `LogisticRegression.fit()`, then this function is
@@ -356,7 +356,7 @@ class AutologgingEventLogger:
         session, patch_obj, function_name, call_args, call_kwargs, exception
     ):
         """
-        Called during the execution of a patched API associated with an autologging integration
+        Called during the execution of a patched API associated with an autologging wandb_sklearn_integration
         when the original / underlying API invocation terminates with an error. For example,
         when a patched implementation of `sklearn.linear_model.LogisticRegression.fit()` invokes the
         original / underlying implementation of `LogisticRegression.fit()`, then this function is

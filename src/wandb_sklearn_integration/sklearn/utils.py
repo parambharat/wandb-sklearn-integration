@@ -1185,7 +1185,7 @@ def _store_patch(autologging_integration, patch):
     Stores a patch for a specified autologging_integration class. Later to be used for being able
     to revert the patch when disabling autologging.
 
-    param autologging_integration: The name of the autologging integration associated with the
+    param autologging_integration: The name of the autologging wandb_sklearn_integration associated with the
                                     patch.
     param patch: The patch to be stored.
     """
@@ -1210,7 +1210,7 @@ def safe_patch(
           (`<destination>.<function_name>`) are propagated to the caller.
         - Exceptions thrown from other parts of the patched implementation (`patch_function`)
           are caught and logged as warnings.
-    param autologging_integration: The name of the autologging integration associated with the
+    param autologging_integration: The name of the autologging wandb_sklearn_integration associated with the
                                     patch.
     param destination: The Python class on which the patch is being defined.
     param function_name: The name of the function to patch on the specified `destination` class.

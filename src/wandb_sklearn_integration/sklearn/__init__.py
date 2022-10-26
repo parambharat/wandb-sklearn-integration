@@ -515,8 +515,8 @@ def autolog(
     param log_models: If ``True``, trained models are logged as wandb artifact.
                        If ``False``, trained models are not logged.
 
-    param disable: If ``True``, disables the scikit-learn autologging integration. If ``False``,
-                    enables the scikit-learn autologging integration.
+    param disable: If ``True``, disables the scikit-learn autologging wandb_sklearn_integration. If ``False``,
+                    enables the scikit-learn autologging wandb_sklearn_integration.
     param exclusive: If ``True``, autologged content is not logged to user-created wandb runs.
                       If ``False``, autologged content is logged to the active wandb run,
                       which may be user-created.
@@ -540,7 +540,7 @@ def autolog(
                                       ``True``. See the `post training metrics`_ section for more
                                       details.
     param serialization_format: The format in which to serialize the model. This should be one of
-                                 the following: ``wandb.integration.sklearn.SERIALIZATION_FORMAT_PICKLE``.
+                                 the following: ``wandb.wandb_sklearn_integration.sklearn.SERIALIZATION_FORMAT_PICKLE``.
     param pos_label: If given, used as the positive label to compute binary classification
                       training metrics such as precision, recall, f1, etc. This parameter should
                       only be set for binary classification model. If used for multi-label model,
@@ -1009,7 +1009,7 @@ def eval_and_log_metrics(
 
 
 def _eval_and_log_metrics_impl(model, x, y_true, *, prefix, sample_weight, pos_label):
-    from src.integration.sklearn.utils import _log_estimator_content
+    from src.wandb_sklearn_integration.sklearn.utils import _log_estimator_content
     from sklearn.base import BaseEstimator
 
     if prefix is None or prefix == "":
