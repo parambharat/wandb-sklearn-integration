@@ -10,11 +10,11 @@ import numpy as np
 from packaging.version import Version
 
 import wandb
-from src.integration.sklearn.autologging_utils import (
+from .autologging_utils import (
     _get_new_training_session_class,
     disable_autologging,
 )
-from src.integration.sklearn.utils import (
+from .utils import (
     log_model,
     _SklearnCustomModelPicklingError,
     _inspect_original_var_name,
@@ -579,7 +579,7 @@ def _autolog(
     import sklearn.metrics
     import sklearn.model_selection
 
-    from src.integration.sklearn.utils import (
+    from .utils import (
         _TRAINING_PREFIX,
         _get_x_y_and_sample_weight,
         _log_estimator_content,
@@ -597,7 +597,7 @@ def _autolog(
     )
 
     if max_tuning_runs is not None and max_tuning_runs < 0:
-        raise wandb.Error(
+        raise wandb.error(
             message=(
                 "`max_tuning_runs` must be non-negative, instead got {}.".format(
                     max_tuning_runs

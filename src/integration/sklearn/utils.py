@@ -10,8 +10,8 @@ from abc import abstractmethod
 from copy import deepcopy
 
 import numpy as np
-from integration.sklearn import gorilla
-from integration.sklearn.autologging_utils import (
+from . import gorilla
+from .autologging_utils import (
     _AutologgingSessionManager,
     _AUTOLOGGING_GLOBALLY_DISABLED,
     AutologgingEventLogger,
