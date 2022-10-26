@@ -10,11 +10,11 @@ import numpy as np
 from packaging.version import Version
 
 import wandb
-from integration.sklearn.autologging_utils import (
+from src.integration.sklearn.autologging_utils import (
     _get_new_training_session_class,
     disable_autologging,
 )
-from integration.sklearn.utils import (
+from src.integration.sklearn.utils import (
     log_model,
     _SklearnCustomModelPicklingError,
     _inspect_original_var_name,
@@ -579,7 +579,7 @@ def _autolog(
     import sklearn.metrics
     import sklearn.model_selection
 
-    from integration.sklearn.utils import (
+    from src.integration.sklearn.utils import (
         _TRAINING_PREFIX,
         _get_x_y_and_sample_weight,
         _log_estimator_content,
@@ -1009,7 +1009,7 @@ def eval_and_log_metrics(
 
 
 def _eval_and_log_metrics_impl(model, x, y_true, *, prefix, sample_weight, pos_label):
-    from integration.sklearn.utils import _log_estimator_content
+    from src.integration.sklearn.utils import _log_estimator_content
     from sklearn.base import BaseEstimator
 
     if prefix is None or prefix == "":

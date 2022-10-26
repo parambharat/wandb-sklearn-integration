@@ -10,15 +10,15 @@ from abc import abstractmethod
 from copy import deepcopy
 
 import numpy as np
-from packaging.version import Version
-
-import wandb
 from integration.sklearn import gorilla
 from integration.sklearn.autologging_utils import (
     _AutologgingSessionManager,
     _AUTOLOGGING_GLOBALLY_DISABLED,
     AutologgingEventLogger,
 )
+from packaging.version import Version
+
+import wandb
 
 _logger = logging.getLogger(__name__)
 
@@ -68,9 +68,7 @@ class TempDir:
 
     def path(self, *path):
         return (
-            os.path.join("./", *path)
-            if self._chdir
-            else os.path.join(self._path, *path)
+            os.path.join("/", *path) if self._chdir else os.path.join(self._path, *path)
         )
 
 
