@@ -1220,7 +1220,7 @@ def safe_patch(
                            representing the underlying / original function. Subsequent arguments
                            should be identical to those of the original function being patched.
     """
-    from integration.sklearn.autologging_utils import (
+    from .autologging_utils import (
         get_autologging_config,
         autologging_is_disabled,
     )
