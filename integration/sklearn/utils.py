@@ -336,10 +336,10 @@ def _get_metric_name_list():
         # exclude class (e.g. metrics.ConfusionMatrixDisplay)
         metric_method = getattr(metrics, metric_method_name)
         if (
-                metric_method_name not in _metric_api_excluding_list
-                and not inspect.isclass(metric_method)
-                and callable(metric_method)
-                and not metric_method_name.startswith("plot_")
+            metric_method_name not in _metric_api_excluding_list
+            and not inspect.isclass(metric_method)
+            and callable(metric_method)
+            and not metric_method_name.startswith("plot_")
         ):
             metric_list.append(metric_method_name)
     return metric_list
@@ -365,7 +365,7 @@ def _get_estimator_info_tags(estimator):
         {
             "estimator_name": estimator.__class__.__name__,
             "estimator_class": (
-                    estimator.__class__.__module__ + "." + estimator.__class__.__name__
+                estimator.__class__.__module__ + "." + estimator.__class__.__name__
             ),
         },
     )
@@ -446,24 +446,24 @@ def _get_class_labels_from_estimator(estimator):
 
 def _log_warning_for_metrics(func_name, func_call, err):
     msg = (
-            func_call.__qualname__
-            + " failed. The metric "
-            + func_name
-            + " will not be recorded."
-            + " Metric error: "
-            + str(err)
+        func_call.__qualname__
+        + " failed. The metric "
+        + func_name
+        + " will not be recorded."
+        + " Metric error: "
+        + str(err)
     )
     _logger.warning(msg)
 
 
 def _log_warning_for_artifacts(func_name, func_call, err):
     msg = (
-            func_call.__qualname__
-            + " failed. The artifact "
-            + func_name
-            + " will not be recorded."
-            + " Artifact error: "
-            + str(err)
+        func_call.__qualname__
+        + " failed. The artifact "
+        + func_name
+        + " will not be recorded."
+        + " Artifact error: "
+        + str(err)
     )
     _logger.warning(msg)
 
@@ -481,7 +481,7 @@ def _get_metrics_value_dict(metrics_list):
 
 
 def _get_classifier_metrics(
-        fitted_estimator, prefix, x, y_true, sample_weight, pos_label
+    fitted_estimator, prefix, x, y_true, sample_weight, pos_label
 ):
     """
     Compute and record various common metrics for classifiers
@@ -719,11 +719,11 @@ def _get_classifier_artifacts(fitted_estimator, prefix, x, y_true, sample_weight
             class_labels = set(y_true)
 
         with matplotlib.rc_context(
-                {
-                    "font.size": min(8.0, 50.0 / len(class_labels)),
-                    "axes.labelsize": 8.0,
-                    "figure.dpi": 175,
-                }
+            {
+                "font.size": min(8.0, 50.0 / len(class_labels)),
+                "axes.labelsize": 8.0,
+                "figure.dpi": 175,
+            }
         ):
             _, ax = plt.subplots(1, 1, figsize=(6.0, 4.0))
             return (
@@ -789,7 +789,7 @@ def _get_classifier_artifacts(fitted_estimator, prefix, x, y_true, sample_weight
 
 
 def _log_specialized_estimator_content(
-        fitted_estimator, prefix, x, y_true, sample_weight, pos_label
+    fitted_estimator, prefix, x, y_true, sample_weight, pos_label
 ):
     import sklearn
 
@@ -807,10 +807,10 @@ def _log_specialized_estimator_content(
                 )
         except Exception as err:
             msg = (
-                    "Failed to autolog metrics for "
-                    + fitted_estimator.__class__.__name__
-                    + ". Logging error: "
-                    + str(err)
+                "Failed to autolog metrics for "
+                + fitted_estimator.__class__.__name__
+                + ". Logging error: "
+                + str(err)
             )
             _logger.warning(msg)
         else:
@@ -823,10 +823,10 @@ def _log_specialized_estimator_content(
             )
         except Exception as e:
             msg = (
-                    "Failed to autolog artifacts for "
-                    + fitted_estimator.__class__.__name__
-                    + ". Logging error: "
-                    + str(e)
+                "Failed to autolog artifacts for "
+                + fitted_estimator.__class__.__name__
+                + ". Logging error: "
+                + str(e)
             )
             _logger.warning(msg)
             return metrics
@@ -872,7 +872,7 @@ def _log_specialized_estimator_content(
 
 
 def _log_estimator_content(
-        estimator, prefix, x, y_true=None, sample_weight=None, pos_label=None,
+    estimator, prefix, x, y_true=None, sample_weight=None, pos_label=None,
 ):
     """
     Logs content for the given estimator, which includes metrics and artifacts that might be
@@ -912,9 +912,9 @@ def _log_estimator_content(
             score = estimator.score(*score_args)
         except Exception as e:
             msg = (
-                    estimator.score.__qualname__
-                    + " failed. The 'training_score' metric will not be recorded. Scoring error: "
-                    + str(e)
+                estimator.score.__qualname__
+                + " failed. The 'training_score' metric will not be recorded. Scoring error: "
+                + str(e)
             )
             _logger.warning(msg)
         else:
@@ -925,7 +925,7 @@ def _log_estimator_content(
     return metrics
 
 
-def _log_parameter_search_results_as_artifact(cv_results_df, ):
+def _log_parameter_search_results_as_artifact(cv_results_df,):
     """
     Records a collection of parameter search results as a wandb artifact
     for the specified run.
@@ -969,7 +969,7 @@ def log_model(sk_model, artifact_path, **kwargs):
     with TempDir() as t:
         model_path = t.path(f"{artifact_path}.pkl")
         joblib.dump(sk_model, model_path)
-        artifact = wandb.Artifact(artifact_path, type="model", metadata=model_metadata, )
+        artifact = wandb.Artifact(artifact_path, type="model", metadata=model_metadata,)
         artifact.add_file(model_path)
         wandb.log_artifact(artifact)
 
@@ -1198,11 +1198,11 @@ def _store_patch(autologging_integration, patch):
 
 
 def safe_patch(
-        autologging_integration,
-        destination,
-        function_name,
-        patch_function,
-        # manage_run=False,
+    autologging_integration,
+    destination,
+    function_name,
+    patch_function,
+    # manage_run=False,
 ):
     """
     Patches the specified `function_name` on the specified `destination` class for autologging
@@ -1289,18 +1289,18 @@ def safe_patch(
         # (i.e. runs created manually via `wandb.init`)
         exclusive = get_autologging_config(autologging_integration, "exclusive", False)
         user_created_wandb_run_is_active = (
-                wandb.run is not None and not _AutologgingSessionManager.active_session()
+            wandb.run is not None and not _AutologgingSessionManager.active_session()
         )
         active_session_failed = (
-                _AutologgingSessionManager.active_session() is not None
-                and _AutologgingSessionManager.active_session().state == "failed"
+            _AutologgingSessionManager.active_session() is not None
+            and _AutologgingSessionManager.active_session().state == "failed"
         )
 
         if (
-                active_session_failed
-                or autologging_is_disabled(autologging_integration)
-                or (user_created_wandb_run_is_active and exclusive)
-                or _AUTOLOGGING_GLOBALLY_DISABLED
+            active_session_failed
+            or autologging_is_disabled(autologging_integration)
+            or (user_created_wandb_run_is_active and exclusive)
+            or _AUTOLOGGING_GLOBALLY_DISABLED
         ):
             return original(*args, **kwargs)
 
@@ -1365,7 +1365,7 @@ def safe_patch(
                 raise
 
         with _AutologgingSessionManager.start_session(
-                autologging_integration
+            autologging_integration
         ) as session:
             try:
 
@@ -1495,7 +1495,7 @@ def safe_patch(
 
 
 def _patch_estimator_method_if_available(
-        flavour_name, class_def, func_name, patched_fn
+    flavour_name, class_def, func_name, patched_fn
 ):
     if not hasattr(class_def, func_name):
         return
@@ -1508,14 +1508,14 @@ def _patch_estimator_method_if_available(
         class_def, func_name, bypass_descriptor_protocol=True
     )
     if raw_original_obj == original and (
-            callable(original) or isinstance(original, property)
+        callable(original) or isinstance(original, property)
     ):
         # normal method or property decorated method
         safe_patch(
             flavour_name, class_def, func_name, patched_fn,
         )
     elif hasattr(raw_original_obj, "delegate_names") or hasattr(
-            raw_original_obj, "check"
+        raw_original_obj, "check"
     ):
         # sklearn delegated method
         safe_patch(

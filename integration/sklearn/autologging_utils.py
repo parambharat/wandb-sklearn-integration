@@ -124,8 +124,8 @@ def _get_new_training_session_class():
             if len(_TrainingSession._session_stack) > 0:
                 self._parent = _TrainingSession._session_stack[-1]
                 self.allow_children = (
-                        _TrainingSession._session_stack[-1].allow_children
-                        and self.allow_children
+                    _TrainingSession._session_stack[-1].allow_children
+                    and self.allow_children
                 )
             _TrainingSession._session_stack.append(self)
             return self
@@ -142,7 +142,7 @@ def _get_new_training_session_class():
                class.
             """
             return (self._parent is None) or (
-                    self._parent.allow_children and self._parent.clazz != self.clazz
+                self._parent.allow_children and self._parent.clazz != self.clazz
             )
 
         @staticmethod
@@ -226,7 +226,7 @@ class AutologgingEventLogger:
 
     @staticmethod
     def log_patch_function_start(
-            session, patch_obj, function_name, call_args, call_kwargs
+        session, patch_obj, function_name, call_args, call_kwargs
     ):
         """
         Called upon invocation of a patched API associated with an autologging integration
@@ -249,7 +249,7 @@ class AutologgingEventLogger:
 
     @staticmethod
     def log_patch_function_success(
-            session, patch_obj, function_name, call_args, call_kwargs
+        session, patch_obj, function_name, call_args, call_kwargs
     ):
         """
         Called upon successful termination of a patched API associated with an autologging
@@ -273,7 +273,7 @@ class AutologgingEventLogger:
 
     @staticmethod
     def log_patch_function_error(
-            session, patch_obj, function_name, call_args, call_kwargs, exception
+        session, patch_obj, function_name, call_args, call_kwargs, exception
     ):
         """
         Called when execution of a patched API associated with an autologging integration
@@ -299,7 +299,7 @@ class AutologgingEventLogger:
 
     @staticmethod
     def log_original_function_start(
-            session, patch_obj, function_name, call_args, call_kwargs
+        session, patch_obj, function_name, call_args, call_kwargs
     ):
         """
         Called during the execution of a patched API associated with an autologging integration
@@ -325,7 +325,7 @@ class AutologgingEventLogger:
 
     @staticmethod
     def log_original_function_success(
-            session, patch_obj, function_name, call_args, call_kwargs
+        session, patch_obj, function_name, call_args, call_kwargs
     ):
         """
         Called during the execution of a patched API associated with an autologging integration
@@ -353,7 +353,7 @@ class AutologgingEventLogger:
 
     @staticmethod
     def log_original_function_error(
-            session, patch_obj, function_name, call_args, call_kwargs, exception
+        session, patch_obj, function_name, call_args, call_kwargs, exception
     ):
         """
         Called during the execution of a patched API associated with an autologging integration

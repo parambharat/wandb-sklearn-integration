@@ -96,8 +96,8 @@ class _AutologgingMetricsManager:
           This safe guarding will prevent code run into this case.
         """
         return (
-                not _SklearnTrainingSession.is_active()
-                and self._log_post_training_metrics_enabled
+            not _SklearnTrainingSession.is_active()
+            and self._log_post_training_metrics_enabled
         )
 
     def disable_log_post_training_metrics(self):
@@ -281,7 +281,7 @@ class _AutologgingMetricsManager:
         return metric_key
 
     def get_run_id_and_dataset_name_for_metric_api_call(
-            self, call_pos_args, call_kwargs
+        self, call_pos_args, call_kwargs
     ):
         """
         Given a metric api call (include the called metric function, and call arguments)
@@ -314,7 +314,7 @@ class _AutologgingMetricsManager:
         """
         # Note: if the case log the same metric key multiple times,
         #  newer value will overwrite old value
-        _run = wandb.run if wandb.run is not None else wandb.init(id=run_id, )
+        _run = wandb.run if wandb.run is not None else wandb.init(id=run_id,)
         _run.log({key: value})
         if self._metric_info_artifact_need_update[run_id]:
             call_commands_list = []
@@ -323,7 +323,7 @@ class _AutologgingMetricsManager:
 
             call_commands_list.sort(key=lambda x: x[0])
             dict_to_log = OrderedDict(call_commands_list)
-            _run.log(dict_to_log, )
+            _run.log(dict_to_log,)
             self._metric_info_artifact_need_update[run_id] = False
 
 
@@ -335,17 +335,17 @@ _metric_api_excluding_list = ["check_scoring", "get_scorer", "make_scorer"]
 
 
 def autolog(
-        flavour_name: str = "sklearn",
-        log_input_examples: bool = False,
-        log_models: bool = True,
-        disable: bool = False,
-        exclusive: bool = False,
-        disable_for_unsupported_versions: bool = False,
-        silent: bool = False,
-        max_tuning_runs: int = 5,
-        log_post_training_metrics: bool = True,
-        serialization_format: str = SERIALIZATION_FORMAT_PICKLE,
-        pos_label: Union[str, int] = None,
+    flavour_name: str = "sklearn",
+    log_input_examples: bool = False,
+    log_models: bool = True,
+    disable: bool = False,
+    exclusive: bool = False,
+    disable_for_unsupported_versions: bool = False,
+    silent: bool = False,
+    max_tuning_runs: int = 5,
+    log_post_training_metrics: bool = True,
+    serialization_format: str = SERIALIZATION_FORMAT_PICKLE,
+    pos_label: Union[str, int] = None,
 ):
     """
     Enables (or disables) and configures autologging for scikit-learn estimators.
@@ -563,17 +563,17 @@ def autolog(
 
 
 def _autolog(
-        flavour_name: str = "sklearn",
-        log_input_examples: bool = False,
-        log_models: bool = True,
-        disable: bool = False,
-        exclusive: bool = False,
-        disable_for_unsupported_versions: bool = False,
-        silent: bool = False,
-        max_tuning_runs: int = 5,
-        log_post_training_metrics: int = True,
-        serialization_format: str = SERIALIZATION_FORMAT_PICKLE,
-        pos_label: Union[int, str] = None,
+    flavour_name: str = "sklearn",
+    log_input_examples: bool = False,
+    log_models: bool = True,
+    disable: bool = False,
+    exclusive: bool = False,
+    disable_for_unsupported_versions: bool = False,
+    silent: bool = False,
+    max_tuning_runs: int = 5,
+    log_post_training_metrics: int = True,
+    serialization_format: str = SERIALIZATION_FORMAT_PICKLE,
+    pos_label: Union[int, str] = None,
 ):
     import pandas as pd
     import sklearn.metrics
@@ -623,7 +623,7 @@ def _autolog(
         return fit_output
 
     def _log_pretraining_metadata(
-            estimator, *args, **kwargs
+        estimator, *args, **kwargs
     ):  # pylint: disable=unused-argument
         """
         Records metadata (e.g., params and tags) for a scikit-learn estimator prior to training.
@@ -649,7 +649,7 @@ def _autolog(
             wandb.config.update(estimator.get_params(deep=should_log_params_deeply))
 
     def _log_posttraining_metadata(
-            estimator, x, y, sample_weight,
+        estimator, x, y, sample_weight,
     ):
         """
         Records metadata for a scikit-learn estimator after training has completed.
@@ -725,7 +725,7 @@ def _autolog(
             if hasattr(estimator, "cv_results_"):
                 try:
                     cv_results_df = pd.DataFrame.from_dict(estimator.cv_results_)
-                    _log_parameter_search_results_as_artifact(cv_results_df, )
+                    _log_parameter_search_results_as_artifact(cv_results_df,)
                 except Exception as e:
 
                     msg = (
@@ -740,8 +740,8 @@ def _autolog(
         method and inherits from `BaseEstimator` (thereby defining the `get_params()` method)
         """
         should_log_post_training_metrics = (
-                log_post_training_metrics
-                and _AUTOLOGGING_METRICS_MANAGER.should_log_post_training_metrics()
+            log_post_training_metrics
+            and _AUTOLOGGING_METRICS_MANAGER.should_log_post_training_metrics()
         )
         with _SklearnTrainingSession(clazz=self.__class__, allow_children=False) as t:
             if t.should_log():
@@ -959,7 +959,7 @@ EVAL_PREFIX = "eval_"
 
 
 def eval_and_log_metrics(
-        model, x, y_true, *, prefix="", sample_weight=None, pos_label=None
+    model, x, y_true, *, prefix="", sample_weight=None, pos_label=None
 ):
     """
     Computes and logs metrics (and artifacts) for the given model and labeled dataset.
