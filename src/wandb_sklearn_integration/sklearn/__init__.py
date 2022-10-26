@@ -1009,7 +1009,7 @@ def eval_and_log_metrics(
 
 
 def _eval_and_log_metrics_impl(model, x, y_true, *, prefix, sample_weight, pos_label):
-    from src.wandb_sklearn_integration.sklearn.utils import _log_estimator_content
+    from .utils import _log_estimator_content
     from sklearn.base import BaseEstimator
 
     if prefix is None or prefix == "":
